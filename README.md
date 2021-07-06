@@ -20,3 +20,30 @@ predictions = model.predict(x_test)
 
 score = accuracy_score(y_test, predictions)
 score
+
+-----------------------------------------------
+A/B TESTING
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import scipy.stats as ss
+from statistics import mean
+
+data = pd.read_csv('C:\\Users\\yhu\\OneDrive - OneWorkplace\\Documents\\BB Triggers Weekly\\\data.csv')
+
+#sns.distplot(data.Conversion_A)
+#sns.distplot(data.Conversion_B)
+
+t_stat, p_val= ss.ttest_ind(data.Conversion_B,data.Conversion_A)
+
+control = statistics.mean(data.Conversion_A)
+test = statistics.mean(data.Conversion_B)
+
+t_stat , p_val, control, test
+
+# p_value 0.0003638 is less than significance level which is 0.05. Hence, we can reject the null hypothesis. 
+# This means that in our A/B testing, newsletter B is performing better than newsletter A. 
+# So our recommendation would be to replace our current newsletter with B to bring more traffic on our website.
+
+----------------------------------------------------------
